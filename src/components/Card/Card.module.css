@@ -1,15 +1,35 @@
-.card{
- background-color: rgba(255,255,255,0.03);
+.card {
+    border-radius: 3px;
+    background-color: rgba(108, 103, 103, 0.56);
+    color: white;
+    padding: 20px;
 }
-.cardHeader{
 
+.cardHeader {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
 }
-.cardBody{
 
+.cardBody {
+    display: flex;
+    gap: 10px;
 }
-.cardBodyDate{
 
+.cardBodyDate {
+    color: rgba(255, 255, 255, 0.40);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
 }
-.cardBodyText{
 
+.cardBodyText {
+    color: rgba(255,255,255,0.60);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    overflow: hidden;
 }

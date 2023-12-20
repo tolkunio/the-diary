@@ -1,15 +1,13 @@
-import s from 'Card.module.css'
+import s from './Card.module.css';
 
-const Card = () => {
-    return (
-        <div className={s.card}>
-            <h2 className={s.cardHeader}></h2>
-            <div className={s.cardBody}>
-                <span className={s.cardBodyDate}></span>
-                <span className={s.cardBodyText}></span>
-            </div>
-        </div>
-    );
+export const Card = ({title,text,date}) => {
+	return (
+		<>
+			<h2 className={s.cardHeader}>{title}</h2>
+			<div className={s.cardBody}>
+				<span className={s.cardBodyDate}> {date}</span>
+				<span className={s.cardBodyText}> {text}</span>
+			</div>
+		</>
+	);
 };
-
-export default Card;
