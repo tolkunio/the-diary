@@ -3,7 +3,10 @@ import {CardButton} from "../Card/CardButton/CardButton.jsx";
 export const CardAddButton = () => {
 	return (
 		<div>
-			<CardButton classname={s.cardAdd}> Новое воспоминание</CardButton>
+			<CardButton classname={s.cardAdd}>
+				<img  className={s.plus} src={'/plus.svg'} alt={'logo'}/>
+				Новое воспоминание
+			</CardButton>
 		</div>
 	);
 };
