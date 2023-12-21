@@ -11,11 +11,13 @@ import {useState} from "react";
 
 const initialData = [
 	{
+		id:1,
 		title: 'Подготовка к обновлению курсов ',
 		date: new Date(),
 		text: 'Горные походы открывают удивительные природные ландшафт'
 	},
 	{
+		id:2,
 		title: 'Поход в горы',
 		date: new Date(),
 		text: 'Думал что это очень много време...'
@@ -26,10 +28,19 @@ function App() {
 
 	const addCard=(card)=>{
 		setCards(oldItems => [...oldItems,{
+			id:Math.max(...oldItems.map(item=>item.id))+1,
 			text:card.text,
 			title:card.title,
 			date:new Date(card.date)
 		}]);
+	};
+	const sortItems=(a,b)=>{
+		if(a.date>b.date){
+			return 1;
+		}
+		else{
+			return -1;
+		}
 	};
 	return (
 		<div className='app'>
@@ -37,8 +48,8 @@ function App() {
 				<Header/>
 				<CardAddButton/>
 				<CardList>
-					{cards.map(item=>(
-						<CardButton>
+					{cards.sort(sortItems).map(item=>(
+						<CardButton key={item.id}>
 							<Card title={item.title} text={item.text} date={item.date.toDateString()}/>
 						</CardButton>
 					))}
