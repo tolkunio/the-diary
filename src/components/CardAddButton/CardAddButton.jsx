@@ -4,7 +4,7 @@ export const CardAddButton = () => {
 	return (
 		<div>
 			<CardButton classname={s.cardAdd}>
-				<img  className={s.plus} src={'/plus.svg'} alt={'logo'}/>
+				<img  className={s.plus} src={'/plus.svg'} alt={'plus'}/>
 				Новое воспоминание
 			</CardButton>
 		</div>
