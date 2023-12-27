@@ -7,3 +7,33 @@
     border: 1px solid red;
     background: rgb(68,13,13);
 }
+
+.input{
+    background: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid whitesmoke;
+    font-family: 'Source Sans 3', sans-serif;
+    width: 100%;
+ }
+
+.inputTitle{
+    border: none;
+    background: none;
+    font-size: 28px;
+    font-weight: 600;
+    border-bottom: 1px solid whitesmoke;
+    font-family: 'Source Sans 3', sans-serif;
+    width: 100%;
+}
+.formRow{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.formLabel{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 150px;
+}
