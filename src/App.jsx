@@ -11,21 +11,28 @@ function App() {
 	const [cards, setCards] = useState([]);
 
 	useEffect(() => {
-		const data=JSON.parse(localStorage.getItem('data'));
-		if(data){
-			setCards(data.map(item=>({
+		const data = JSON.parse(localStorage.getItem('data'));
+		if (data) {
+			setCards(data.map(item => ({
 				...item,
-				date:new Date(item.date)
+				date: new Date(item.date)
 			})));
 		}
 	}, []);
 
+	useEffect(() => {
+		if (cards.length) {
+			localStorage.setItem('data', JSON.stringify(cards));
+		}
+	}, [cards]);
+
 	const addCard = (card) => {
 		setCards(oldItems => [...oldItems, {
 			id: Math.max(...oldItems.map(item => item.id)) + 1,
-			text: card.text,
-			title: card.title,
-			date: new Date(card.date)
+			title:card.title,
+			tag: card.tag,
+			date: new Date(card.date),
+			post:card.post
 		}]);
 	};
 

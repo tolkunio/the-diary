@@ -18,6 +18,6 @@ module.exports = {
     ],
     "react/prop-types": "off",
     'semi':['error','always',{'omitLastInOneLineBlock':false}],
-    'indent':['error','tab']
+    'indent':['error','tab',{ "SwitchCase": 1 }]
   },
 }

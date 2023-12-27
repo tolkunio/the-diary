@@ -1,63 +1,66 @@
 import s from './CardForm.module.css';
 import {Button} from "../Button/Button";
-import {useState} from "react";
+import {useEffect, useReducer} from "react";
 import cn from 'classnames';
+import {formReducer, INIT_STATE} from "./CardForm.state.js";
 
 export const CardForm = ({onAddCardHandler}) => {
-	const [formValidState, setFormValidState] = useState({
-		title: true,
-		text: true,
-		date: true
-	});
+	const [formState, dispatchForm] = useReducer(formReducer, INIT_STATE);
+	const {isValid, isFormReadyToSubmit, values} = formState;
+	useEffect(() => {
+		let timerId;
+		if (!isValid.date || !isValid.text || !isValid.title || !isValid.post) {
+			timerId = setTimeout(() => {
+				dispatchForm({type: 'RESET_VALIDITY'});
+			}, 2000);
+		}
+		return () => {
+			clearTimeout(timerId);
+		};
+	}, [isValid]);
+
+	useEffect(() => {
+		console.log(isFormReadyToSubmit);
+		if (isFormReadyToSubmit) {
+			onAddCardHandler(values);
+			dispatchForm({type: 'CLEAR_FORM'});
+		}
+	}, [isFormReadyToSubmit]);
 
 
 	const addNote = (event) => {
 		event.preventDefault();
-		const formData = new FormData(event.target);
+		console.log(event.target);
+		const formData = new FormData(event.currentTarget);
+		console.log(formData);
 		const formProps = Object.fromEntries(formData);
-		let isFormValid = true;
-		{
-			console.log(formProps);
-		}
-		if (!formProps.title?.trim().length) {
-			setFormValidState(state => ({...state, title: false}));
-			isFormValid = false;
-		}
-		if (!formProps.text?.trim().length) {
-			setFormValidState(state => ({...state, text: false}));
-			isFormValid = false;
-		}
-		if (!formProps.date?.trim().length) {
-			setFormValidState(state => ({...state, title: false}));
-			isFormValid = false;
-		}
-		if (isFormValid == false) {
-			return;
-		}
-		onAddCardHandler(formProps);
+		dispatchForm({type: 'SUBMIT_FORM', payload: formProps});
+
 	};
 
 	return (
 		<form className={s.cardForm} onSubmit={addNote}>
 			<div>
-				<input type={"text"} name={'title'} className={cn(s.invalid, s.inputTitle)}/>
+				<input type={"text"} name={'title'} id={'title'} className={cn(s.invalid, s.inputTitle)}/>
 			</div>
 			<div className={s.formRow}>
 				<label className={s.formLabel} htmlFor={'date'}>
 					<img src={'/calendar.svg'} alt={'calendar'}/>
 					<span>Дата</span>
 				</label>
-				<input id='date' type={"date"} name={'date'} className={cn(s.input,`${formValidState.date ? '' : s.invalid}`)}/>
+				<input id='date' type={"date"} name={'date'}
+					className={cn(s.input, `${isValid.date ? '' : s.invalid}`)}/>
 			</div>
 			<div className={s.formRow}>
-				<label className={s.formLabel} htmlFor={'text'}>
+				<label className={s.formLabel} htmlFor={'tag'}>
 					<img src={'/folder.svg'} alt={'folder'}/>
 					<span>Метки</span>
 				</label>
-				<input type={"text"} name={'text'} id={'text'} className={`${s.input}${formValidState.text ? '' : s.invalid}`}/>
+				<input type={"text"} name={'tag'} id={'tag'}
+					className={`${s.input}${isValid.tag ? '' : s.invalid}`}/>
 			</div>
 
-			<textarea name={'post'} id={''} cols={'30'} rows={'10'}></textarea>
+			<textarea name={'post'} id={'post'} cols={'30'} rows={'10'} className={`${isValid.post ? '' : s.invalid}`}></textarea>
 			<Button text={'Save'}/>
 		</form>
 	);

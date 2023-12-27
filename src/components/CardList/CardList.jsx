@@ -3,6 +3,7 @@ import {CardButton} from "../Card/CardButton/CardButton.jsx";
 import {Card} from "../Card/Card.jsx";
 
 export const CardList = ({cards}) => {
+	console.log(cards);
 	if(cards.length==0){
 		return <p>Записей пока нет, добавьте новую!</p>;
 	}
@@ -18,7 +19,7 @@ export const CardList = ({cards}) => {
 			{
 				cards.sort(sortItems).map(item => (
 					<CardButton key={item.id}>
-						<Card title={item.title} text={item.text} date={item.date.toDateString()}/>
+						<Card title={item.title} tag={item.tag} post={item.post} date={item.date.toDateString()}/>
 					</CardButton>
 				))}
 		</div>
