@@ -5,25 +5,20 @@ import {Header} from "./components/Header/Header";
 import {CardList} from "./components/CardList/CardList";
 import {CardAddButton} from "./components/CardAddButton/CardAddButton";
 import {CardForm} from "./components/CardForm/CardForm";
-import {useState} from "react";
-
-const initialData = [
-	{
-		id: 1,
-		title: 'Подготовка к обновлению курсов ',
-		date: new Date(),
-		text: 'Горные походы открывают удивительные природные ландшафт'
-	},
-	{
-		id: 2,
-		title: 'Поход в горы',
-		date: new Date(),
-		text: 'Думал что это очень много време...'
-	}
-];
+import {useEffect, useState} from "react";
 
 function App() {
-	const [cards, setCards] = useState(initialData);
+	const [cards, setCards] = useState([]);
+
+	useEffect(() => {
+		const data=JSON.parse(localStorage.getItem('data'));
+		if(data){
+			setCards(data.map(item=>({
+				...item,
+				date:new Date(item.date)
+			})));
+		}
+	}, []);
 
 	const addCard = (card) => {
 		setCards(oldItems => [...oldItems, {
