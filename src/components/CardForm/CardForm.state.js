@@ -16,6 +16,8 @@ export const INIT_STATE = {
 
 export function formReducer(state, action) {
 	switch (action.type) {
+		case 'SET_VALUE':
+			return {...state,values: {...state.values,...action.payload}};
 		case 'CLEAR_FORM':
 			return {...state,isValid: INIT_STATE.values};
 		case 'RESET_VALIDITY':

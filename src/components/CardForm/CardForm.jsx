@@ -37,18 +37,21 @@ export const CardForm = ({onAddCardHandler}) => {
 		dispatchForm({type: 'SUBMIT_FORM', payload: formProps});
 
 	};
+	const onChange =(e)=>{
+		dispatchForm({type:'SET_VALUE',payload:{[e.target.name]:e.target.value}});
+	};
 
 	return (
 		<form className={s.cardForm} onSubmit={addNote}>
 			<div>
-				<input type={"text"} name={'title'} id={'title'} className={cn(s.invalid, s.inputTitle)}/>
+				<input type={"text"} name={'title'} onChange={onChange} value={values.title} id={'title'} className={cn(s.invalid, s.inputTitle)}/>
 			</div>
 			<div className={s.formRow}>
 				<label className={s.formLabel} htmlFor={'date'}>
 					<img src={'/calendar.svg'} alt={'calendar'}/>
 					<span>Дата</span>
 				</label>
-				<input id='date' type={"date"} name={'date'}
+				<input id='date' type={"date"} onChange={onChange} name={'date'} value={values.date}
 					className={cn(s.input, `${isValid.date ? '' : s.invalid}`)}/>
 			</div>
 			<div className={s.formRow}>
@@ -56,11 +59,11 @@ export const CardForm = ({onAddCardHandler}) => {
 					<img src={'/folder.svg'} alt={'folder'}/>
 					<span>Метки</span>
 				</label>
-				<input type={"text"} name={'tag'} id={'tag'}
+				<input type={"text"} name={'tag'} onChange={onChange} id={'tag'} value={values.tag}
 					className={`${s.input}${isValid.tag ? '' : s.invalid}`}/>
 			</div>
 
-			<textarea name={'post'} id={'post'} cols={'30'} rows={'10'} className={`${isValid.post ? '' : s.invalid}`}></textarea>
+			<textarea name={'post'} id={'post'} onChange={onChange} value={values.post} cols={'30'} rows={'10'} className={`${isValid.post ? '' : s.invalid}`}></textarea>
 			<Button text={'Save'}/>
 		</form>
 	);
