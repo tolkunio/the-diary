@@ -3,7 +3,6 @@ import {CardButton} from "../Card/CardButton/CardButton.jsx";
 import {Card} from "../Card/Card.jsx";
 
 export const CardList = ({cards}) => {
-	console.log(cards);
 	if(cards.length==0){
 		return <p>Записей пока нет, добавьте новую!</p>;
 	}

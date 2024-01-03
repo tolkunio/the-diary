@@ -11,20 +11,22 @@
 .input{
     background: none;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     border-bottom: 1px solid whitesmoke;
     font-family: 'Source Sans 3', sans-serif;
     width: 100%;
+    color: white;
  }
 
 .inputTitle{
     border: none;
     background: none;
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 500;
     border-bottom: 1px solid whitesmoke;
     font-family: 'Source Sans 3', sans-serif;
     width: 100%;
+    color: white;
 }
 .formRow{
     display: flex;

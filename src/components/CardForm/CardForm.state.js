@@ -17,18 +17,18 @@ export const INIT_STATE = {
 export function formReducer(state, action) {
 	switch (action.type) {
 		case 'SET_VALUE':
-			return {...state,values: {...state.values,...action.payload}};
+			return {...state, values: {...state.values,...action.payload}};
 		case 'CLEAR_FORM':
 			return {...state,isValid: INIT_STATE.values};
 		case 'RESET_VALIDITY':
 			return{...state,isValid: INIT_STATE.isValid};
 		case 'SUBMIT_FORM': {
-			const tagValidity=action.payload.tag?.trim().length;
-			const titleValidity=action.payload.title?.trim().length;
-			const postValidity=action.payload.post?.trim().length;
-			const dateValidity=action.payload.date;
+			const tagValidity=state.values.tag?.trim().length;
+			const titleValidity=state.values.title?.trim().length;
+			const postValidity=state.values.post?.trim().length;
+			const dateValidity=state.values.date;
 			return {
-				...state,values:action.payload,
+				...state,
 				isValid: {
 					text: tagValidity,
 					title: titleValidity,
