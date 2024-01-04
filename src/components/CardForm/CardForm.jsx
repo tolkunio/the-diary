@@ -14,13 +14,13 @@ export const CardForm = ({onAddCardHandler}) => {
 
 	const focusError = () => {
 		switch (true) {
-			case !isValid.title:
+			case isValid.title:
 				titleRef.current.focus();
 				break;
-			case !isValid.date:
+			case isValid.date:
 				dateRef.current.focus();
 				break;
-			case !isValid.post:
+			case isValid.post:
 				postRef.current.focus();
 				break;
 		}
@@ -29,7 +29,7 @@ export const CardForm = ({onAddCardHandler}) => {
 	useEffect(() => {
 		let timerId;
 		focusError(isValid);
-		if (!isValid.date || !isValid.text || !isValid.title || !isValid.post) {
+		if (!isValid.date || !isValid.tag || !isValid.title || !isValid.post) {
 			timerId = setTimeout(() => {
 				dispatchForm({type: 'RESET_VALIDITY'});
 			}, 2000);
@@ -39,30 +39,25 @@ export const CardForm = ({onAddCardHandler}) => {
 		};
 	}, [isValid]);
 
-	useEffect(() => {
-		console.log(isFormReadyToSubmit);
-		if (isFormReadyToSubmit) {
-			onAddCardHandler(values);
-			dispatchForm({type: 'CLEAR_FORM'});
-		}
-	}, [isFormReadyToSubmit]);
-
 
 	const addNote = (event) => {
 		event.preventDefault();
 		dispatchForm({type: 'SUBMIT_FORM'});
+		dispatchForm({type: 'CLEAR_FORM'});
 
 	};
 	const onChange = (e) => {
-		console.log(e.target.name, e.target.value);
-		dispatchForm({type: 'SET_VALUE', payload: {[e.target.name]: e.target.value}});
+		const payload = {
+			[e.target.name]: e.target.value
+		};
+		dispatchForm({type: 'SET_VALUE', payload: payload});
 	};
 
 	return (
 		<form className={s.cardForm} onSubmit={addNote}>
 			<div>
 				<input type={"text"} ref={titleRef} name={'title'} onChange={onChange} value={values.title} id={'title'}
-					className={cn(s.invalid, s.inputTitle)}/>
+					className={cn(s.input, `${isValid.title ? '' : s.invalid}`)}/>
 			</div>
 			<div className={s.formRow}>
 				<label className={s.formLabel} htmlFor={'date'}>
@@ -78,7 +73,7 @@ export const CardForm = ({onAddCardHandler}) => {
 					<span>Метки</span>
 				</label>
 				<input type={"text"} name={'tag'} onChange={onChange} id={'tag'} value={values.tag}
-					className={`${s.input}${isValid.tag ? '' : s.invalid}`}/>
+					className={cn(s.input, `${isValid.tag ? '' : s.invalid}`)}/>
 			</div>
 
 			<textarea name={'post'} id={'post'} ref={postRef} onChange={onChange} value={values.post} cols={'30'}
@@ -86,4 +81,5 @@ export const CardForm = ({onAddCardHandler}) => {
 			<Button text={'Save'}/>
 		</form>
 	);
-};
+}
+;

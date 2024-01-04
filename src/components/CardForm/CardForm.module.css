@@ -4,30 +4,19 @@
     gap: 30px;
 }
 .invalid{
-    border: 1px solid red;
-    background: rgb(68,13,13);
+    border: 1px solid crimson;
+    background: rosybrown;
 }
+
 
 .input{
-    background: none;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 500;
     border-bottom: 1px solid whitesmoke;
     font-family: 'Source Sans 3', sans-serif;
     width: 100%;
-    color: white;
  }
 
-.inputTitle{
-    border: none;
-    background: none;
-    font-size: 28px;
-    font-weight: 500;
-    border-bottom: 1px solid whitesmoke;
-    font-family: 'Source Sans 3', sans-serif;
-    width: 100%;
-    color: white;
-}
 .formRow{
     display: flex;
     align-items: center;

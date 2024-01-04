@@ -1,6 +1,9 @@
 import s from './Button.module.css';
-export const Button = ({text, onClick}) => {
+import cn from "classnames";
+export const Button = ({text, onClick,disabled=true}) => {
 	return (
-		<button className={s.button} type={'submit'} onClick={onClick}>{text}</button>
+		<button className={cn(s.button,`${disabled ? '' : s.disabled}`)} type={'submit'} onClick={onClick}>
+			{text}
+		</button>
 	);
 };
